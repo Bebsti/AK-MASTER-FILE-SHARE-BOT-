@@ -5,6 +5,9 @@ import re
 import ast
 import math
 import random
+import pytz
+import datetime
+from datetime import datetime
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 import pyrogram
@@ -36,6 +39,10 @@ BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
 
+mumbai_timezone = pytz.timezone('Asia/Kolkata') 
+current_time = datetime.now(mumbai_timezone) 
+current_day = current_time.strftime('%A')
+        
 @Client.on_message(filters.command('autofilter') & filters.user(ADMINS))
 async def fil_mod(client, message): 
       mode_on = ["yes", "on", "true"]
@@ -1464,7 +1471,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b><i>🎬 𝘛𝘪𝘵𝘵𝘭𝘦: {search}\n\n🗣 𝘙𝘦𝘲𝘶𝘦𝘴𝘵𝘦𝘥 𝘉𝘺: {message.from_user.mention}\n👥 𝘜𝘱𝘭𝘰𝘢𝘥𝘦𝘥 𝘉𝘺: {message.chat.title}\n\n📪 𝘠𝘰𝘶𝘳 𝘍𝘪𝘭𝘦 𝘐𝘴 𝘙𝘦𝘢𝘥𝘺 𝘕𝘰𝘸👇👇</i></b>"
+        cap = f"<b><i>🎬 𝘛𝘪𝘵𝘵𝘭𝘦: {search}\n\n🗣 𝘙𝘦𝘲𝘶𝘦𝘴𝘵𝘦𝘥 𝘉𝘺: {message.from_user.mention}\n\n𝘏𝘢𝘷𝘦 𝘈 𝘕𝘪𝘤𝘦 {current_day}🏖️ 𝘉𝘺{message.chat.title}\n\n📪 𝘠𝘰𝘶𝘳 𝘍𝘪𝘭𝘦 𝘐𝘴 𝘙𝘦𝘢𝘥𝘺 𝘕𝘰𝘸👇👇</i></b>"
     if imdb and imdb.get('poster'):
         try:
             if message.chat.id == SUPPORT_CHAT_ID:
